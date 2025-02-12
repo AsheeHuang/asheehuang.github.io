@@ -25,6 +25,11 @@
               </li>
             {% endfor %}
           </ul>
+          <div class="tags-wrapper ml-1 ml-md-4">
+            {% for tag in content.tags %}
+              <span class="tag-item">{{ tag }}</span>
+            {% endfor %}
+          </div>
         </div>
       </div>
     </li>
