@@ -5,6 +5,10 @@ date: 2025-2-12 00:00:00
 description: 介紹兩種更快的 hash table，Elastic Hashing 和 Funnel Hashing 與其如何突破傳統 hash table 的限制
 tags: hash algorithm
 categories: self-learning
+giscus_comments: true
+related_posts: false
+toc:
+  sidebar: left
 ---
 
 # 前言
@@ -14,7 +18,6 @@ categories: self-learning
 在 1985 年，計算機科學家 **Andrew Yao** 提出了一個經典猜想：「**均勻探測（Uniform Probing）是最優的**」。這意味著，在 **無重排（No Reordering）** 的情況下，最壞情況的期望探測次數應該是 $$O(\delta^{-1}) $$，其中 $$ \delta $$ 代表哈希表的空閒比例（負載餘裕），例如當 $$ \delta = 0.01 $$時，表示哈希表已經填滿 99%，剩下 1% 的空位。
 
 這個猜想影響了數十年來的哈希表設計，使得許多研究都接受了「當哈希表高負載時，查詢時間必然變慢」的現實。但這真的是無法突破的限制嗎？
-
 在這篇論文 _Optimal Bounds for Open Addressing Without Reordering_ 中，作者 **Martín Farach-Colton、Andrew Krapivin 和 William Kuszmaul** **正式推翻了 Yao 的猜想！**
 
 他們提出了兩種創新的方法:
@@ -41,7 +44,7 @@ Funnel Hashing 是目前最優的貪心開放位址哈希策略，透過 **層�
 
 ---
 
-### **Elastic Hashing 的結構**
+## **Elastic Hashing 的結構**
 
 Elastic Hashing 將哈希表分成多層（層數約為 $$O(\log n)$$），每一層的大小是 指數遞減 的。例如：
 
@@ -57,7 +60,7 @@ Elastic Hashing 將哈希表分成多層（層數約為 $$O(\log n)$$），每�
 
 ---
 
-### **Elastic Hashing 的插入策略**
+## **Elastic Hashing 的插入策略**
 
 Elastic Hashing 不貪心 地選擇第一個空位，而是：
 
@@ -84,7 +87,7 @@ Elastic Hashing 不貪心 地選擇第一個空位，而是：
 
 ---
 
-### **為什麼這樣做能降低查詢時間？**
+## **為什麼這樣做能降低查詢時間？**
 
 Elastic Hashing 的核心思想是：
 
@@ -96,7 +99,7 @@ Elastic Hashing 的核心思想是：
 
 ---
 
-### **Elastic Hashing 的時間複雜度**
+## **Elastic Hashing 的時間複雜度**
 
 - **攤銷查詢時間：** $$O(1)$$（最優）
   - 這意味著，對於大多數元素，平均只需要 $$O(1)$$ 次探測就能找到。
@@ -116,7 +119,7 @@ $$ \delta $$ 很小）時。
 
 ---
 
-### **Funnel Hashing 的結構**
+## **Funnel Hashing 的結構**
 
 Funnel Hashing **將哈希表劃分為多層，每層大小指數遞減**，並使用 **「區塊化的 Bucket 結構」** 來組織插入：
 
@@ -144,7 +147,7 @@ Funnel Hashing **將哈希表劃分為多層，每層大小指數遞減**，並�
 
 ---
 
-### **Funnel Hashing 的插入策略**
+## **Funnel Hashing 的插入策略**
 
 當一個新元素 $$x$$ 需要插入時，**它會按照 Funnel 的方式逐層嘗試插入**：
 
@@ -162,7 +165,7 @@ Funnel Hashing **將哈希表劃分為多層，每層大小指數遞減**，並�
 
 ---
 
-### **Funnel Hashing 如何改進最壞查詢時間？**
+## **Funnel Hashing 如何改進最壞查詢時間？**
 
 Funnel Hashing 改進查詢時間的核心機制是：
 
@@ -182,7 +185,7 @@ Funnel Hashing 改進查詢時間的核心機制是：
 
 ---
 
-### **Funnel Hashing 的時間複雜度**
+## **Funnel Hashing 的時間複雜度**
 
 - **攤銷查詢時間：** $$O(\log \delta^{-1})$$
 - **最壞查詢時間：** $$O(\log \delta^{-1})$$
@@ -192,7 +195,7 @@ Funnel Hashing 改進查詢時間的核心機制是：
 
 ---
 
-## **Funnel Hashing vs Elastic Hashing**
+# **Funnel Hashing vs Elastic Hashing**
 
 | 特性             | Funnel Hashing              | Elastic Hashing           |
 | ---------------- | --------------------------- | ------------------------- |
@@ -207,7 +210,7 @@ Funnel Hashing 改進查詢時間的核心機制是：
 
 ---
 
-## 總結
+# 總結
 
 以下是各種方法的時間複雜度比較：
 
@@ -231,6 +234,6 @@ Funnel Hashing 改進查詢時間的核心機制是：
 
 隨著資料量的增長與系統負載的提升，**如何設計更高效、更穩定的哈希表將成為關鍵議題**。
 
-## 附錄
+# 附錄
 
 [Optimal Bounds for Open Addressing Without Reordering](https://arxiv.org/abs/2501.02305)
