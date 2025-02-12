@@ -44,7 +44,8 @@
       "endDate": "2019-06",
       "score": "4.02",
       "courses": ["Scheduling", "Discrte Optimization", "Operation Research"]
-    }, {
+    },
+    {
       "institution": "National Chiao Tung University",
       "location": "Hsinchu, Taiwan",
       "url": "https://www.nctu.edu.tw/",
